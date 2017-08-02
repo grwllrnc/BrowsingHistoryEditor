@@ -1,0 +1,70 @@
+﻿{% extends 'layout.html' %}
+{% block main_content %}
+<h2>FAQs</h2>
+<div class="row col-sm-8">
+ <dl class="">
+  <dt><p>Wie funktioniert das Programm?</p></dt>
+     <dd><p>Das Programm ist ein Browser-basiertes Tool, das wie eine Webseite funktioniert. Wenn Sie das Programm ausführen, wird ein lokaler Webserver auf Ihrem Computer gestartet (namens ‘localhost’), der auf dem Port 5000 läuft. (Folgende Adresse wird im Browser angezeigt: http://localhost:5000). Dabei öffnet sich ein Browser-Fenster, in dem das Programm läuft.</p></dd>
+     <dt><p>Werden bei der Nutzung des Programms Daten über das Internet übermittelt?</p></dt>
+     <dd><p>Nein, das Programm wird lokal auf Ihrem Computer ausgeführt und es werden keine Daten über das Internet übertragen.</p></dd>
+     <dt><a name="anonymisieren"></a><p>Wie werden die Einträge anonymisiert?</p></dt>
+     <dd><p>Die URL wird mit einem zufälligen Unique-Identifier ersetzt, der keinerlei Rückschlüsse auf die URL zu lässt und nicht entschlüsselt werden kann. Suchbegriffe werden ebenfalls mit einem zufälligen Unique-Identifier ersetzt. Beispiel:
+     </p>
+         <p><pre>anonymisiert-968c9d6056f7a8efcd045b61ea9848e392dc4a018378259c9a5e758fd71a6e5e-ec749af98d4d40389b894816dbb2568e</pre></p>
+         <p>Der Titel der Webseite, der Host und die Redirect URL werden durch ‘***’ ersetzt.</p>
+         <p>Mit der Funktion 'URLs kürzen' haben Sie die Möglichkeit, den URL-Teil (rot markiert) nach der Domain abzuschneiden: 'http://www.meteoschweiz.admin.ch<span class="red">/home/aktuell/meteoschweiz-blog/meteoschweiz-blog.html?topic=/content/meteoswiss/tags/topics/wetter</span>'</p>
+     </dd>
+     <dt><p>Warum kann ich die Einträge des Browserverlaufs nur anonymisieren und nicht löschen?</p></dt>
+     <dd><p>Das Programm dient dazu, den Umfang Ihrer Internetnutzung zu messen. Dabei soll die Nutzung von bestimmten Webseiten im Verhältnis zu Ihrer gesamten Internetnutzung möglichst genau bestimmbar sein. Durch das Löschen von Einträgen des Browserverlaufs würde das Verhältnis unter Umständen verfälscht werden.</p></dd>
+     <dt><p>Werden alle Einträge aus dem Browserverlauf geladen bzw. exportiert?</p></dt>
+     <dd><p>Nein, der Daten-Umfang ist zeitlich beschränkt. Die Software lädt nur die Einträge der letzten 60 Tage.</p></dd>
+     <dt><p>Kann das Programm auf Daten aus dem privaten oder Inkognito-Modus zugreifen?</p></dt>
+     <dd><p>Nein, diese Daten werde nicht im Browserverlauf gespeichert.</p></dd>
+     <dt><p>Welche Daten werden exportiert?</p></dt>
+     <dd><p>Welche Daten exportiert werden, hängt von dem Browser ab, den Sie benutzen. Nicht alle Browser speichern die gleichen Daten. Je nach Browser werden folgende Daten exportiert:
+     </p><ul>
+         <li>URL (z.B. https://www.google.ch/#q=nachrichten+schweiz+heute)</li>
+         <li>URL-ID (eine Zahl, mit der die URL eindeutig identifiziert werden kann)</li>
+         <li>Titel der URL (z.B. ‘nachrichten schweiz heute - Google-Suche’)</li>
+         <li>URL-Weiterleitungen</li>
+         <li>Referrer-URL (die URL der Seite, von der Sie auf die aktuelle gekommen sind)</li>
+         <li>Datum und Uhrzeit des Seitenaufrufs (als Zeitstempel)</li>
+         <li>Datum und Uhrzeit des letzten Besuchs (als Zeitstempel)</li>
+         <li>Domain (z.B. ‘google.ch’)</li>
+         <li>Häufigkeit der Besuche</li>
+         <li>Frecency: (ein Index aus Häufigkeit und kürzlichem Besuch)</li>
+         <li>Informationen, ob die URL eingetippt wurde oder nicht</li>
+         <li>Wie die URL besucht wurde (z.B. via Link)</li>
+         <li>Session-ID</li>
+         <li>Name des Browsers</li>
+         <li>Name des Betriebssystems</li>
+     </ul>
+         <p>Wenn Sie den Browserverlauf exportieren, wird eine CSV-Datei generiert, die Sie z.B. in Excel öffnen können.</p>
+         <p><strong><span class="yellow">Bitte nehmen Sie keine Veränderung an der CSV-Datei vor.</span></strong> Falls Sie nach dem Export noch Änderungen machen möchten, gehen Sie bitte folgendermassen vor: <ol><li>Öffnen Sie das Programm erneut.</li><li>Nehmen Sie die gewünschten Änderungen vor.</li><li>Exportieren Sie die Daten noch einmal.</li></ol></p></dd>
+     <dt><p>Werden Zugangsdaten wie Benutzernamen oder Passwörter exportiert?</p></dt>
+     <dd><p>Nein, es werden keine Zugangsdaten verarbeitet oder exportiert.</p></dd>
+     <dt><p>Das Programm funktioniert nicht. Was kann ich tun?</p></dt>
+     <dd><p>Bitte senden Sie ein E-Mail mit folgenden Angaben an <a href="mailto:b.gerwollronca@ipmz.uzh.ch">b.gerwollronca@ipmz.uzh.ch</a>:</p>
+     <ul>
+         <li>Kurze Problembeschreibung</li>
+         <li>Name des Betriebssystems</li>
+         <li>Version des Betriebssystems</li>
+         <li>Name des Browsers</li>
+         <li>Version des Browsers</li>
+     </ul>
+         <p>Bitte senden Sie die Datei <strong><span class="yellow">'server.log'</span></strong> (aus dem Ordner des Programms) als Anhang mit.</p></dd>
+     <dt><p>Kann ich den Quellcode des Programms einsehen?</p></dt>
+     <dd><p>Ja. Der Quellcode ist auf Github [LINK] zu finden.</p></dd>
+     <dt><p>Wird der Browserverlauf meines Browsers durch die Software verändert oder überschrieben?</p></dt>
+     <dd><p>Nein, der Browserverlauf bleibt unverändert. Das Programm erstellt eine lokale, temporäre Kopie Ihres Browserverlaufs. Wenn Sie Einträge des Browserverlauf mit dem Programm bearbeiten (anonymisieren und exportieren), dann werden diese Änderungen an der Kopie durchgeführt. Wenn Sie das Programm von Ihrem Computer entfernen (löschen), wird auch die Kopie gelöscht.</p></dd>
+     <dt><p>Verändert die Software Dateien, Ordner oder Programme auf meinem Computer?</p></dt>
+     <dd><p>Nein, es werden weder eigene noch System-Dateien oder -Ordner verändert. Alle Dateien und Ordner, die das Programm verwendet, sind in dem Ordner des Programms gespeichert. Dort werden auch die lokalen, temporären Dateien erstellt (Kopien des Browserverlaufs als Datenbank und als CSV-Datei). Wenn Sie das Programm wieder entfernen (den Ordner des Programms löschen), werden auch diese Dateien gelöscht.</p></dd>
+     <dt><p>Was passiert mit meinen Daten?</p></dt>
+     <dd><p>Die Daten des Browserverlaufs werden vertraulich behandelt und ausschliesslich im Rahmen des Forschungsprojekts verwendet. Sie werden nicht an Dritte weitergegeben, und Dritte haben keine Einsicht in die Daten. Die Daten werden nur in anonymisierter Form für Publikationen und Präsentationen im Rahmen des Forschungsprojekts verwendet, so dass keinerlei Rückschlüsse auf Ihre Person möglich sind.</p></dd>
+     <dt><p>Warum muss ich das Programm als Administrator ausführen, wenn ich den Browserverlauf des MS Internet Explorers / Edge bearbeiten möchte?</p></dt>
+     <dd>Der Internet Explorer (ab Version 10) speichert den Browserverlauf in der Datei WebCacheV01.dat. Diese Datei wird von Windows geöffnet und für andere Programme gesperrt, sobald Sie ihren Computer einschalten bzw. sich anmelden. Damit der Browserverlauf gelesen werden kann, erstellt die Software eine lokale Kopie (eine so genannte <a href="https://technet.microsoft.com/en-us/library/cc757854(v=ws.10).aspx" target="_blank">Volume Shadow Copy</a>) der Datei erstellt. Damit der dafür zuständige Windows-Dienst Volume Shadow Copy Service (vss) genutzt werden kann, muss das Programm mit Administrator-Rechten ausgeführt werden.</p></dd>
+     <dt>Wie öffne ich das Programm mit Administrator-Rechten?</dt>
+     <dd>Im Kontextmenü (klicken Sie mit der rechten Maustaste auf die Programm-Datei) wählen Sie die Option „Als Administrator ausführen“.</dd>
+ </dl>
+</div>
+{% endblock %}

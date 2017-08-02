@@ -1,0 +1,14 @@
+{"tables_s8": {"urls": {"history_visits.title": "title",
+                     "history_items.url": "url",
+                     "visit_count": "visit_count",
+                     "history_visits.title": "title",
+                     "history_items.id": "id"
+                    },
+            "visits": {"redirect_source": "referrer",
+                       "redirect_destination": "redirect_destination",
+                       "origin": "origin",
+                       "(history_visits.visit_time + 978307200)": "visit_date",
+                       "history_visits.id": "id", 
+                       "history_visits.history_item": "url_id"
+                      }
+           }, "tables": {"urls": {"url": "url", "title": "title", "last_visit_date": "last_visit_date", "redirect_urls": "redirect_urls", "id": "id", "visit_count": "visit_count"}, "visits": {"url_id": "url_id", "visit_date": "visit_date"}}, "path": {"Darwin": ["/Users/{0}/Library/Safari/"]}, "file_name": ["History.plist", "History.db"]}

@@ -1,0 +1,21 @@
+﻿{% extends 'layout.html' %}
+{% block main_content %}
+<h2>Übersicht</h2>
+<div>
+	<p>Browserverlauf geladen von: {{ browser_name }}</p>
+    <p>Geladene Zeitspanne: {{ date_range[0] }} bis {{ date_range[1] }}</p>
+    <p>Anzahl besuchter Domains: {{ num_domains }}</p>
+    <!-- <p>Durchschnittliche Anzahl Besuche pro Tag: {{ avg_visits }}</p> -->
+</div>
+<div>
+	<h3>Top 10 Domains</h3>
+	<div class="table table-responsive">
+    <table class="table table-striped">
+		<tr><th>Domain</th><th>Besuche</th></tr>
+		{% for d in top_10 %}
+		<tr><td>{{ d }}</td><td>{{ top_10[d] }}</td></tr>
+		{% endfor %}
+    </table>
+	</div>
+</div>
+{% endblock %}

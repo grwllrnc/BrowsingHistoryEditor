@@ -1,0 +1,4 @@
+drop table if exists urls;
+drop table if exists visits;
+CREATE TABLE urls (id INTEGER PRIMARY KEY, url LONGVARCHAR, redirect_urls LONGVARCHAR, title LONGVARCHAR, rev_host LONGVARCHAR DEFAULT NULL, visit_count INTEGER DEFAULT 0, hidden INTEGER DEFAULT 0 NOT NULL, typed INTEGER DEFAULT 0 NOT NULL, frecency INTEGER DEFAULT NULL, last_visit_date INTEGER);
+CREATE TABLE visits (id INTEGER PRIMARY KEY, referrer INTEGER DEFAULT NULL, url_id INTEGER NOT NULL, visit_date INTEGER, visit_duration INTEGER DEFAULT NULL, visit_type INTEGER DEFAULT 0 NOT NULL, session INTEGER, redirect_destination INTEGER NULL UNIQUE, origin INTEGER NOT NULL DEFAULT 0);CREATE TABLE sys_info (id INTEGER, browser LONGVARCHAR, os LONGVARCHAR)

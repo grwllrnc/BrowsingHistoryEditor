@@ -1,0 +1,22 @@
+﻿{% extends 'layout.html' %}
+{% block main_content %}
+    <h2>URLs auf Domains kürzen</h2>
+<p class="desc">Hier können Sie URLs auswählen und auf die <span class="green">Domain</span> verkürzen. Z.B. die URL '<span class="green">http://www.meteoschweiz.admin.ch</span><span class="red">/home/aktuell/meteoschweiz-blog/meteoschweiz-blog.html?topic=/content/meteoswiss/tags/topics/wetter</span>' auf 'meteoschweiz.admin.ch/***' verkürzen.</p>
+    <p class="instr">Markieren Sie die entsprechenden URLs und klicken Sie auf 'URL(s) kürzen' (ganz unten).</p>
+        <form action="{{ url_for('list_entries', sort=request.args.get('sort')) }}" method="GET">
+            <input type="textfield" name="q" value="" placeholder="Suche z.B. meteoschweiz" />
+            <input type="submit" value="suchen" />
+        </form>
+        <h3>Browserverlauf</h3>
+        <form action="{{ url_for('list_entries') }}" method="POST">
+    <div class="table table-responsive">
+	<table class='table table-striped' id="data-table">
+		<tr><th>Auswahl</th><th><a href="{{ url_for('list_entries', sort='date', q=request.args.get('q')) }}">Datum</a></th><th><a href="{{ url_for('list_entries', sort='domains', q=request.args.get('q')) }}">URLs</a></th><th><a href="{{ url_for('list_entries', sort='frequency', q=request.args.get('q')) }}">Besuche</a></th></tr>
+		{% for d in domains %}
+		<tr><td><input type="checkbox" name='check' value="{{ d[0] }}" /></td><td>{{ d[1] }}</td><td>{{ d[2] }}</td><td>{{ d[3] }}</td></tr>
+		{% endfor %}
+	</table>
+   </div>
+   <input type="submit" value="anonymisieren" />
+   </form>
+{% endblock %}

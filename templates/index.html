@@ -1,0 +1,57 @@
+﻿{% extends 'layout.html' %}
+{% block main_content %}
+<div>
+	<h2>BrowsingHistoryEditor</h2>
+        <p class="desc"><p>Herzlichen Dank, dass Sie an der Erhebung von Internetnutzungsdaten teilnehmen!</p>
+
+<p>Mit diesem Programm können Sie Ihren Browserverlauf laden und einzelne Einträge <a href="/faqs#anonymisieren">anonymisieren</a>.</p>
+<p>Zur Anonymisierung von Einträgen stehen Ihnen folgende Möglichkeiten zur Verfügung:</p>
+<ul>
+    <li>Sie können <a href="https://de.wikipedia.org/wiki/Domain_(Internet)" title="Wikipedia-Eintrag zu Domains" target="_blank">Domain-Namen</a> (z.B. 'meteoschweiz.admin.ch') <a href="/faqs#anonymisieren">anonymisieren</a>.</li>
+<li>Sie können Suchbegriffe (z.B. aus einer Google-Suche) anonymisieren.</li>
+<li>Sie können <a href="https://de.wikipedia.org/wiki/Uniform_Resource_Locator" target="_blank" title="Wikipedia-Eintrag zu URL">URLs</a> auf den Domain-Namen kürzen.<br />Z.B. die URL 'http://www.meteoschweiz.admin.ch/home/aktuell/meteoschweiz-blog/meteoschweiz-blog.html?topic=/content/meteoswiss/tags/topics/wetter'<br />auf 'meteoschweiz.admin.ch/***' verkürzen.</li>
+</ul>
+<p>Diese Funktionen können Sie im Menü auswählen.</p>
+<p>Wenn Sie mit der Bearbeitung fertig sind, können Sie den bearbeiteten Browserverlauf exportieren (<a href="https://de.wikipedia.org/wiki/CSV_(Dateiformat)" target="_blank" title="Wikipedia-Eintrag">CSV-Datei</a>).</p>
+    <p><span class="yellow">Wenn Sie Fragen haben, lesen Sie bitte die <a href="/faqs">FAQs</a> oder kontaktieren uns per <a href="mailto:b.gerwollronca@ipmz.uzh.ch">E-Mail</a>.</span>
+</p>
+</div>
+<div class="browser-form col-lg-8">
+<h3>Browserverlauf laden</h3>
+        <p class="instr">Bitte wählen Sie den Browser aus, den Sie am meisten nutzen.</p>
+        <p><strong>Betriebssystem:</strong> {{ os }}</p>
+        <form id="upload" action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
+           <select required name="browser_name" id="browser" form_id="upload">
+                <option id="Firefox" value="Firefox">Firefox</option>
+                <option id="Chrome" value="Chrome">Google Chrome</option>
+                <option id="IE11" value="IE11">Internet Explorer (ab Version 10)</option>
+                <option id="Safari" value="Safari">Safari</option>
+            </select>
+            <input class="hidden" id="file" name="file" />
+            <input type="submit" value="Daten laden" />
+        </form>
+</div>
+<script type="text/javascript">
+    function notFound(param){
+        params = param.split("&");
+        for(var i = 0; i < params.length; i++){
+           items = params[i].split("=");
+           for(var j = 0; j < items.length; j++){
+               if(items[j]=="notFound" & items[j+1] == 'True'){
+                   return true;
+               }
+           }
+        }
+        return false;
+    }
+    if(window.location.search){
+        param = window.location.search.substr(1);
+        client = window.location.search.substr(1).split("client=")[1].split("&")[0];
+        if(notFound(param)){
+            document.getElementById("file").removeAttribute("class");
+            document.getElementById("file").setAttribute("type", "file");
+            document.getElementById(client).setAttribute("selected", "selected");
+        }
+    }
+</script>
+{% endblock %}

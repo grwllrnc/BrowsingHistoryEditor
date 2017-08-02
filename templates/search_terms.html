@@ -1,0 +1,22 @@
+﻿{% extends 'layout.html' %}
+{% block main_content %}
+    <h2>Suchbegriffe anonymisieren</h2>
+    <p class="desc">Hier können Sie die Suchbegriffe auswählen, die Sie anonymisieren möchten.</p>
+    <p class="instr">Markieren Sie die entsprechenden Suchbegriffe und klicken Sie auf 'anonymisieren' (ganz unten).</p>
+    <form action="{{ url_for('search_terms', sort=request.args.get('sort')) }}" method="GET">
+    <input type="textfield" name="q" value="" placeholder="Suche z.B. meteoschweiz" />
+    <input type="submit" value="suchen" />
+    </form>
+	<h3>Verwendete Suchbegriffe</h3>
+    <form action="{{ url_for('search_terms') }}" method="POST">
+      <div class="table table-responsive">
+	<table class='table table-striped' id="data-table">
+		<tr><th>Auswahl</th><th><a href="{{ url_for('search_terms', sort='keywords', q=request.args.get('q')) }}">Suchbegriffe</a></th><th>Domain</th><th><a href="{{ url_for('search_terms', sort='frequency', q=request.args.get('q')) }}">Besuche</a></th></tr>
+		{% for t in search_terms %}
+		<tr><td><input type="checkbox" name='check' value="{{ t }}" /></td><td>{{ t }}</td><td>{{ search_terms[t]['urls'] }}</td><td>{{ search_terms[t]['count'] }}</td></tr>
+		{% endfor %}
+	</table>
+      </div>
+    <input type="submit" value="anonymisieren" />
+    </form>
+{% endblock %}

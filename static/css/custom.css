@@ -1,0 +1,75 @@
+@font-face { font-family: Fugaz One; src: url(../fonts/Fugaz_One/FugazOne-Regular.ttf); }
+@font-face { font-family: Nunito; src: url(../fonts/Nunito/Nunito-Regular.ttf); }
+
+
+body {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: regular;
+}
+
+h2 {
+     font-family: 'Nunito', sans-serif;
+     font-weight: bold;
+}
+
+dt {
+     font-size: 1.3em;
+     color: 'blue';
+}
+
+dd {
+     margin-bottom: 1.9em;
+}
+
+pre {
+     display: inline;
+     padding: 0.3em;
+}
+
+ul.alert li {
+     list-style: none;
+}
+
+span.green {
+ background-color: #ddf9bb;
+}
+
+span.yellow {
+ background-color: #f9f6bb;
+}
+
+span.red {
+ background-color: #f9d7bb;
+}
+
+#menu-toggle {
+    margin: -10px 10px 0 0;
+}
+
+#sidebar-wrapper {
+    background-color: #393838;}
+
+.alert {
+    margin-top: 20px;
+}
+
+div.browser-form {
+    border: 1px solid grey;
+    border-radius: 0.6em;
+    padding: 0 1em 1.5em;
+
+}
+
+.logo {
+    font-family: 'Fugaz One', cursive;
+    font-size: 1.9em;
+    /*font-weight: bold; */
+    margin: 10px 0px 0px 5px;
+    color: #ea9312;
+}
+
+.instr {
+    font-size: 1.3em;
+    font-weight: medium;
+    font-style: italic;
+}

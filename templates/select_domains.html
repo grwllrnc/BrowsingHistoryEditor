@@ -1,0 +1,22 @@
+﻿{% extends 'layout.html' %}
+{% block main_content %}
+    <h2>Domains anonymisieren</h2>
+    <p class="desc">Hier können Sie die Domains auswählen, die Sie anonymisieren möchten.</p>
+    <p class="instr">Markieren Sie die entsprechenden Domains und klicken Sie auf 'anonymisieren' (ganz unten).</p>
+    <form action="{{ url_for('select', sort=request.args.get('sort')) }}" method="GET">
+    <input type="textfield" name="q" value="" placeholder="Suche z.B. meteoschweiz" />
+    <input type="submit" value="suchen" />
+    </form>
+	<h3>Besuchte Domains</h3>
+    <form action="{{ url_for('select') }}" method="POST">
+      <div class="table table-responsive">
+	<table class='table table-striped' id="data-table">
+		<tr><th>Auswahl</th><th><a href="{{ url_for('select', sort='domains', q=request.args.get('q')) }}">Domain</a></th><th><a href="{{ url_for('select', sort='frequency', q=request.args.get('q')) }}">Besuche</a></th></tr>
+		{% for d in domains %}
+		<tr><td><input type="checkbox" name='check' value="{{ d }}" /></td><td>{{ d }}</td><td>{{ domains[d]['count'] }}</td></tr>
+		{% endfor %}
+	</table>
+      </div>
+    <input type="submit" value="anonymisieren" />
+    </form>
+{% endblock %}
