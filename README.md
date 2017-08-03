@@ -5,4 +5,4 @@ BrowsingHistoryEditor was developed for a research project at the University of 
 
 Supported browsers: Firefox, Chrome, Internet Explorer (>=10), Edge, Safari.
 
-Current version: 0.0.9
+Current version: 0.1.0
