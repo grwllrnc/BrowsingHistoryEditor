@@ -78,11 +78,11 @@ class BrowsingHistory(object):
             for p in self._browser_specs['path'][_os]:
                 if self._browser_name == 'Firefox':
                     # checking for profile name
-                    pat = re.compile(r'\w+.default')
+                    pat = re.compile(r'\w+.default([\w\-\_\.]+)?')
                     if os.path.isdir(p.format(user)):
                         for item in os.listdir(p.format(user)):
                             if re.findall(pat, item):
-                                profile_name = re.findall(pat, item)[0]
+                                profile_name = item
                                 path = os.path.join(p.format(user), profile_name, self._browser_specs['file_name'][0])
                                 if os.path.isfile(path):
                                     return path
@@ -677,11 +677,11 @@ class BrowsingHistory(object):
         :return: Boolean value
         """
         data = self._query(
-            "SELECT url_id, visits.id, url, title, rev_host, visit_count, typed, frecency, last_visit_date, redirect_urls, redirect_destination, origin, referrer, visit_date, visit_type, session FROM visits, urls WHERE visits.url_id = urls.id;")
+            "SELECT url_id, visits.id, url, title, rev_host, visit_count, typed, last_visit_date, redirect_urls, referrer, visit_date, visit_type FROM visits, urls WHERE visits.url_id = urls.id;")
         if data:
             data = [t + (self._browser_name, self.os_full) for t in data]
-            header = ['url_id', 'visits_id', 'url', 'title', 'rev_host', 'visit_count', 'typed', 'frecency', 'last_visit_date',
-                      'redirect_urls', 'redirect_destination', 'origin', 'referrer', 'visit_date', 'visit_type', 'session', 'browser', 'operation system']
+            header = ['url_id', 'visits_id', 'url', 'title', 'rev_host', 'visit_count', 'typed', 'last_visit_date',
+                      'redirect_urls', 'referrer', 'visit_date', 'visit_type', 'browser', 'operation system']
             with open(os.path.join(self._file_path,'tmp', 'Export_Browserverlauf.csv'), 'w', encoding='utf-8') as f:
                 writer = csv.writer(f, delimiter=';', lineterminator='\n')
                 writer.writerow(header)
@@ -999,10 +999,10 @@ def export():
 @app.route('/log')
 def get_log():
     # Adapted from Flask doc example: http://flask.pocoo.org/docs/0.12/
-    if 'server.log' in os.listdir(FILE_PATH):
-        return send_from_directory(FILE_PATH, 'server.log', as_attachment=True)
+    if 'server.log' in os.listdir(os.path.join(FILE_PATH, 'tmp')):
+        return send_from_directory(os.path.join(FILE_PATH, 'tmp'), 'server.log', as_attachment=True)
     else:
-        flash('Es ist kein log vorhanden.')
+        flash('Es ist kein Log-File gefunden worden.')
         return render_template('index.html', os=' '.join([bh.os, bh.os_release]))
 
 
@@ -1050,10 +1050,10 @@ if __name__ == '__main__':
     if not app.debug:
         import logging
         from logging import FileHandler
-        file_handler = FileHandler('server.log')
+        file_handler = FileHandler(os.path.join(FILE_PATH, 'tmp', 'server.log'))
         file_handler.setLevel(logging.WARNING)
         app.logger.addHandler(file_handler)
-        logging.basicConfig(filename='server.log', level=logging.DEBUG)
+        logging.basicConfig(filename=os.path.join(FILE_PATH, 'tmp', 'server.log'), level=logging.DEBUG)
     webbrowser.open('http://localhost:5000', new=2)
     print('STATUS: BrowsingHistoryEditor läuft auf http://localhost:5000 (Drücken Sie CTRL+C, um das Programm zu beenden)')
     app.run(host='localhost', port=5000, debug=False)
